@@ -60,6 +60,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\EasyRestStatus.cs" />
+    <Compile Include="Core\Period.cs" />
     <Compile Include="UI\FrmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +96,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="UI\FrmAbout.resx">
       <DependentUpon>FrmAbout.cs</DependentUpon>
@@ -121,6 +124,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\DefaultAlarmSound.wav" />
     <Content Include="Assets\EasyRestIcon.ico" />
     <Content Include="Assets\EasyRestIcon.png" />
     <Content Include="Assets\LogoBlack.png" />

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.ChkStartStop = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -37,6 +38,7 @@
             this.BtnSettings = new System.Windows.Forms.Button();
             this.BtnAbout = new System.Windows.Forms.Button();
             this.BtnClose = new System.Windows.Forms.Button();
+            this.NiEasyRest = new System.Windows.Forms.NotifyIcon(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -120,6 +122,7 @@
             this.BtnSettings.TabIndex = 1;
             this.BtnSettings.Text = "الإعدادات";
             this.BtnSettings.UseVisualStyleBackColor = true;
+            this.BtnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // BtnAbout
             // 
@@ -155,6 +158,12 @@
             this.BtnClose.UseVisualStyleBackColor = false;
             this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
+            // NiEasyRest
+            // 
+            this.NiEasyRest.Icon = ((System.Drawing.Icon)(resources.GetObject("NiEasyRest.Icon")));
+            this.NiEasyRest.Visible = true;
+            this.NiEasyRest.Click += new System.EventHandler(this.NiEasyRest_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,6 +184,7 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.Text = "منظم الراحة";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -192,6 +202,7 @@
         private System.Windows.Forms.Button BtnSettings;
         private System.Windows.Forms.Button BtnAbout;
         private System.Windows.Forms.Button BtnClose;
+        private System.Windows.Forms.NotifyIcon NiEasyRest;
     }
 }
 

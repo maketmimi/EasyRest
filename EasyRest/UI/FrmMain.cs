@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using EasyRest.UI;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EasyRest
@@ -16,6 +11,8 @@ namespace EasyRest
         {
             InitializeComponent();
         }
+
+        private bool _IsClosedByXButton = true;
 
         private void UpdateStartStopCheckBox()
         {
@@ -54,7 +51,30 @@ namespace EasyRest
 
         private void BtnClose_Click(object sender, EventArgs e)
         {
+            _IsClosedByXButton = false;
             Application.Exit();
+        }
+
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_IsClosedByXButton)
+            {
+                e.Cancel = true;
+                this.Hide();
+            }
+        }
+
+        private void NiEasyRest_Click(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            FrmAlarmOverlay frmAlarm = new FrmAlarmOverlay("Testing", 10);
+
+            frmAlarm.Show();
+
         }
     }
 }

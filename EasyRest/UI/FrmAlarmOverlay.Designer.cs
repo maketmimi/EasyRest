@@ -28,22 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAlarmOverlay));
-            this.LbMessage = new System.Windows.Forms.Label();
+            this.LbAlarmMessage = new System.Windows.Forms.Label();
             this.BtnClose = new System.Windows.Forms.Button();
+            this.TShowTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // LbMessage
+            // LbAlarmMessage
             // 
-            this.LbMessage.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LbMessage.Font = new System.Drawing.Font("Segoe UI", 50F, System.Drawing.FontStyle.Bold);
-            this.LbMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.LbMessage.Location = new System.Drawing.Point(12, 95);
-            this.LbMessage.Name = "LbMessage";
-            this.LbMessage.Size = new System.Drawing.Size(760, 103);
-            this.LbMessage.TabIndex = 0;
-            this.LbMessage.Text = "لقد حان وقت الراحة";
-            this.LbMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LbAlarmMessage.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.LbAlarmMessage.Font = new System.Drawing.Font("Segoe UI", 50F, System.Drawing.FontStyle.Bold);
+            this.LbAlarmMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.LbAlarmMessage.Location = new System.Drawing.Point(12, 95);
+            this.LbAlarmMessage.Name = "LbAlarmMessage";
+            this.LbAlarmMessage.Size = new System.Drawing.Size(760, 103);
+            this.LbAlarmMessage.TabIndex = 0;
+            this.LbAlarmMessage.Text = "N/A";
+            this.LbAlarmMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BtnClose
             // 
@@ -62,6 +64,11 @@
             this.BtnClose.TabIndex = 0;
             this.BtnClose.Text = "إغلاق";
             this.BtnClose.UseVisualStyleBackColor = false;
+            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            // 
+            // TShowTimer
+            // 
+            this.TShowTimer.Tick += new System.EventHandler(this.TShowTimer_Tick);
             // 
             // FrmAlarmOverlay
             // 
@@ -71,7 +78,7 @@
             this.ClientSize = new System.Drawing.Size(784, 461);
             this.ControlBox = false;
             this.Controls.Add(this.BtnClose);
-            this.Controls.Add(this.LbMessage);
+            this.Controls.Add(this.LbAlarmMessage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -82,14 +89,18 @@
             this.RightToLeftLayout = true;
             this.ShowInTaskbar = false;
             this.Text = "تنبيه";
+            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmAlarmOverlay_FormClosed);
+            this.Load += new System.EventHandler(this.FrmAlarmOverlay_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label LbMessage;
+        private System.Windows.Forms.Label LbAlarmMessage;
         private System.Windows.Forms.Button BtnClose;
+        private System.Windows.Forms.Timer TShowTimer;
     }
 }
