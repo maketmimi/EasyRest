@@ -39,6 +39,7 @@
             this.BtnAbout = new System.Windows.Forms.Button();
             this.BtnClose = new System.Windows.Forms.Button();
             this.NiEasyRest = new System.Windows.Forms.NotifyIcon(this.components);
+            this.TMainTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -164,6 +165,11 @@
             this.NiEasyRest.Visible = true;
             this.NiEasyRest.Click += new System.EventHandler(this.NiEasyRest_Click);
             // 
+            // TMainTimer
+            // 
+            this.TMainTimer.Interval = 1000;
+            this.TMainTimer.Tick += new System.EventHandler(this.TMainTimer_Tick);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,6 +209,7 @@
         private System.Windows.Forms.Button BtnAbout;
         private System.Windows.Forms.Button BtnClose;
         private System.Windows.Forms.NotifyIcon NiEasyRest;
+        private System.Windows.Forms.Timer TMainTimer;
     }
 }
 

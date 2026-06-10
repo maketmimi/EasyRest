@@ -1,4 +1,5 @@
-﻿using EasyRest.UI;
+﻿using EasyRest.Core;
+using EasyRest.UI;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -13,6 +14,7 @@ namespace EasyRest
         }
 
         private bool _IsClosedByXButton = true;
+        private EasyRestStatus _Status = new EasyRestStatus(); 
 
         private void UpdateStartStopCheckBox()
         {
@@ -31,14 +33,36 @@ namespace EasyRest
 
         }
 
+        private void SetRunningState(bool IsRunning)
+        {
+            if (IsRunning)
+            {
+                _Status.Start();
+                TMainTimer.Start();
+            }
+            else
+            {
+                _Status.Pause();
+                TMainTimer.Stop();
+            }
+        }
+
         private void ChkStartStop_CheckedChanged(object sender, EventArgs e)
         {
             UpdateStartStopCheckBox();
+            SetRunningState(ChkStartStop.Checked);
+        }
+
+        private void LoadFormWithStatus()
+        {
+            LbCurrentPeriod.Text = _Status.CurrentPeriod.ToString();
+            LbCountDown.Text = _Status.GetReminingDurationString();
+            ChkStartStop.Checked = _Status.IsRunning;
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            UpdateStartStopCheckBox();
+            LoadFormWithStatus();
         }
 
         private void BtnAbout_Click(object sender, EventArgs e)
@@ -71,10 +95,43 @@ namespace EasyRest
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
-            FrmAlarmOverlay frmAlarm = new FrmAlarmOverlay("Testing", 10);
+            bool IsAppPausedByUser = !_Status.IsRunning;
 
-            frmAlarm.Show();
+            if (!IsAppPausedByUser)
+                ChkStartStop.Checked = false; // pause app
 
+            if (FrmSettings.EditSettings(_Status) == FrmSettings.EnEditSettingsResult.Edited)
+                UpdatePeriodInfoInUI();
+
+            if (!IsAppPausedByUser)
+                ChkStartStop.Checked = true; // resume app
         }
+
+        private void UpdateCountDownLabel()
+        {
+            LbCountDown.Text = _Status.GetReminingDurationString();
+        }
+
+        private void UpdatePeriodInfoInUI()
+        {
+            LbCurrentPeriod.Text = _Status.CurrentPeriod.ToString();
+            UpdateCountDownLabel();
+        }
+
+        private void TMainTimer_Tick(object sender, EventArgs e)
+        {
+            _Status.NumberOfSecondsRemainig--;
+            UpdateCountDownLabel();
+
+            if (_Status.NumberOfSecondsRemainig == 0)
+            {
+                TMainTimer.Stop();
+                _Status.CurrentPeriod.ShowEndAlarm();
+                _Status.SwitchPeriods();
+                UpdatePeriodInfoInUI();
+                TMainTimer.Start();
+            }
+        }
+    
     }
 }

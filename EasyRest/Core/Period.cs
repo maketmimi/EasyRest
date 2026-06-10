@@ -20,7 +20,7 @@ namespace EasyRest.Core
         {
             FrmAlarmOverlay frmAlarm = new FrmAlarmOverlay(EndOfPeriodMessage, 20);
 
-            frmAlarm.ShowDialog(); // TODO make sure this is ok or maybe using the show() method instead
+            frmAlarm.ShowDialog();
         }
 
         public override string ToString()
