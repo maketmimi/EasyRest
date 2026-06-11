@@ -130,6 +130,7 @@
     <Content Include="Assets\LogoBlack.png" />
     <Content Include="Assets\MalekAltamimi_Logo.png" />
     <Content Include="EasyRestIcon.ico" />
+    <Content Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

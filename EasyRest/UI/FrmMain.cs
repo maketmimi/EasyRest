@@ -1,4 +1,5 @@
 ﻿using EasyRest.Core;
+using EasyRest.Properties;
 using EasyRest.UI;
 using System;
 using System.Drawing;
@@ -15,6 +16,20 @@ namespace EasyRest
 
         private bool _IsClosedByXButton = true;
         private EasyRestStatus _Status = new EasyRestStatus(); 
+
+        private void LoadUserSavedConfigsIfAny()
+        {
+            EasyRestStatus LoadedStatus = EasyRestStatus.ConvertStringRecordToStatusObject(Settings.Default.UserSavedConfigs);
+
+            if (LoadedStatus != null)
+                _Status = LoadedStatus;
+        }
+
+        private void SaveUserConfigs()
+        {
+            Settings.Default.UserSavedConfigs = _Status.ConvertToStringRecord();
+            Settings.Default.Save();
+        }
 
         private void UpdateStartStopCheckBox()
         {
@@ -62,6 +77,7 @@ namespace EasyRest
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            LoadUserSavedConfigsIfAny();
             LoadFormWithStatus();
         }
 
@@ -131,6 +147,11 @@ namespace EasyRest
                 UpdatePeriodInfoInUI();
                 TMainTimer.Start();
             }
+        }
+
+        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SaveUserConfigs();
         }
     
     }

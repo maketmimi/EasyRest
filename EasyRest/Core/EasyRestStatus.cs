@@ -4,10 +4,10 @@ namespace EasyRest.Core
 {
     public class EasyRestStatus
     {
+        private static readonly string _RecordSeperator = "[RestStatus]";
         public ulong NumberOfSecondsRemainig { get; set; }
         public Period RestPeriod { get; }
         public Period WorkPeriod { get; }
-
         private Period _CurrentPeriod;
         public Period CurrentPeriod
         {
@@ -61,6 +61,40 @@ namespace EasyRest.Core
 
             IsRunning = false;
         }
-    
+
+        private EasyRestStatus(Period workPeriod, Period restPeriod)
+        {
+            WorkPeriod = workPeriod;
+            RestPeriod = restPeriod;
+
+            CurrentPeriod = workPeriod;
+            IsRunning = false;
+        }
+
+        public string ConvertToStringRecord()
+        {
+            return string.Join(_RecordSeperator, WorkPeriod.ConvertToStringRecord(), RestPeriod.ConvertToStringRecord());
+        }
+
+        public static EasyRestStatus ConvertStringRecordToStatusObject(string Record)
+        {
+            string[] arrRecord = Record.Split(new[] { _RecordSeperator }, StringSplitOptions.None);
+
+            try
+            {
+                Period WorkPeriod = Period.ConvertStringRecordToPeriod(arrRecord[0]);
+                Period RestPeriod = Period.ConvertStringRecordToPeriod(arrRecord[1]);
+
+                if (WorkPeriod == null || RestPeriod == null)
+                    return null;
+                
+                return new EasyRestStatus(WorkPeriod, RestPeriod);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
     }
 }

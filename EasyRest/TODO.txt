@@ -1,0 +1,3 @@
+﻿1- add deiffrent types of alarms -> notifications and sound only
+2- add alarm sound customizabilty
+3- add Restore defaults in settings
