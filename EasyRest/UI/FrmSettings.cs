@@ -6,7 +6,7 @@ namespace EasyRest.UI
 {
     public partial class FrmSettings : Form
     {
-        private EasyRestStatus _Configs;
+        private readonly EasyRestStatus _Configs;
         private EnEditSettingsResult _EditResult = EnEditSettingsResult.Canceld;
 
         public enum EnEditSettingsResult
@@ -33,10 +33,30 @@ namespace EasyRest.UI
             return frmSettings._EditResult;
         }
 
+        private void SetAlarmTypeToPeriod(string AlarmType, Period period)
+        {
+            switch (AlarmType)
+            {
+                case "تنبيه بالإشعارات":
+                    period.AlarmType = Period.EnAlarmType.NotificationsOnly;
+                    break;
+                case "تنبيه صوتي":
+                    period.AlarmType = Period.EnAlarmType.SoundOnly;
+                    break;
+                default:
+                    period.AlarmType = Period.EnAlarmType.ScreenOverlay;
+                    break;
+            }
+        }
+
         private void ApplySettings()
         {
             _Configs.WorkPeriod.Duration = new TimeSpan(0, ((int)NudWorkDuration.Value), 0);
             _Configs.RestPeriod.Duration = new TimeSpan(0, ((int)NudRestDuration.Value), 0);
+
+            SetAlarmTypeToPeriod(CbWorkPeriodAlarmType.SelectedItem.ToString(), _Configs.WorkPeriod);
+            SetAlarmTypeToPeriod(CbRestPeriodAlarmType.SelectedItem.ToString(), _Configs.RestPeriod);
+
             _Configs.CurrentPeriod = (Period) CbCurrentPeriod.SelectedItem; // this should be here, or there might be logical error
 
             _EditResult = EnEditSettingsResult.Edited;
@@ -48,6 +68,22 @@ namespace EasyRest.UI
             this.Close();
         }
 
+        private void LoadComboBoxWithCurrentSelectedAlarmType(ComboBox cbToLoad, Period.EnAlarmType AlarmType)
+        {
+            switch (AlarmType)
+            {
+                case Period.EnAlarmType.NotificationsOnly:
+                    cbToLoad.SelectedItem = "تنبيه بالإشعارات";
+                    break;
+                case Period.EnAlarmType.SoundOnly:
+                    cbToLoad.SelectedItem = "تنبيه صوتي";
+                    break;
+                default:
+                    cbToLoad.SelectedItem = "تنبيه ملء الشاشة";
+                    break;
+            }
+        }
+
         private void LoadFormWithCurrentSettings()
         {
             CbCurrentPeriod.Items.Add(_Configs.WorkPeriod);
@@ -56,6 +92,9 @@ namespace EasyRest.UI
 
             NudWorkDuration.Value = ((decimal)_Configs.WorkPeriod.Duration.TotalMinutes);
             NudRestDuration.Value = ((decimal)_Configs.RestPeriod.Duration.TotalMinutes);
+
+            LoadComboBoxWithCurrentSelectedAlarmType(CbWorkPeriodAlarmType, _Configs.WorkPeriod.AlarmType);
+            LoadComboBoxWithCurrentSelectedAlarmType(CbRestPeriodAlarmType, _Configs.RestPeriod.AlarmType);
         }
 
         private void FrmSettings_Load(object sender, System.EventArgs e)
@@ -68,5 +107,6 @@ namespace EasyRest.UI
             _EditResult = EnEditSettingsResult.Canceld;
             this.Close();
         }
+    
     }
 }

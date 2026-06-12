@@ -42,6 +42,10 @@
             this.NudRestDuration = new System.Windows.Forms.NumericUpDown();
             this.BtnApply = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.CbWorkPeriodAlarmType = new System.Windows.Forms.ComboBox();
+            this.CbRestPeriodAlarmType = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NudWorkDuration)).BeginInit();
@@ -87,6 +91,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.CbWorkPeriodAlarmType);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.NudWorkDuration);
@@ -151,7 +157,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.CbRestPeriodAlarmType);
             this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.NudRestDuration);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -245,6 +253,62 @@
             this.BtnCancel.UseVisualStyleBackColor = true;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(131, 31);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(94, 25);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "نوع التنبيه:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // CbWorkPeriodAlarmType
+            // 
+            this.CbWorkPeriodAlarmType.BackColor = System.Drawing.Color.White;
+            this.CbWorkPeriodAlarmType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbWorkPeriodAlarmType.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CbWorkPeriodAlarmType.ForeColor = System.Drawing.Color.Black;
+            this.CbWorkPeriodAlarmType.FormattingEnabled = true;
+            this.CbWorkPeriodAlarmType.Items.AddRange(new object[] {
+            "تنبيه ملء الشاشة",
+            "تنبيه صوتي",
+            "تنبيه بالإشعارات"});
+            this.CbWorkPeriodAlarmType.Location = new System.Drawing.Point(31, 62);
+            this.CbWorkPeriodAlarmType.Name = "CbWorkPeriodAlarmType";
+            this.CbWorkPeriodAlarmType.Size = new System.Drawing.Size(189, 29);
+            this.CbWorkPeriodAlarmType.TabIndex = 2;
+            // 
+            // CbRestPeriodAlarmType
+            // 
+            this.CbRestPeriodAlarmType.BackColor = System.Drawing.Color.White;
+            this.CbRestPeriodAlarmType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbRestPeriodAlarmType.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CbRestPeriodAlarmType.ForeColor = System.Drawing.Color.Black;
+            this.CbRestPeriodAlarmType.FormattingEnabled = true;
+            this.CbRestPeriodAlarmType.Items.AddRange(new object[] {
+            "تنبيه ملء الشاشة",
+            "تنبيه صوتي",
+            "تنبيه بالإشعارات"});
+            this.CbRestPeriodAlarmType.Location = new System.Drawing.Point(31, 62);
+            this.CbRestPeriodAlarmType.Name = "CbRestPeriodAlarmType";
+            this.CbRestPeriodAlarmType.Size = new System.Drawing.Size(189, 29);
+            this.CbRestPeriodAlarmType.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label6.ForeColor = System.Drawing.Color.Black;
+            this.label6.Location = new System.Drawing.Point(131, 31);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 25);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "نوع التنبيه:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FrmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,5 +358,9 @@
         private System.Windows.Forms.NumericUpDown NudRestDuration;
         private System.Windows.Forms.Button BtnApply;
         private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox CbWorkPeriodAlarmType;
+        private System.Windows.Forms.ComboBox CbRestPeriodAlarmType;
+        private System.Windows.Forms.Label label6;
     }
 }

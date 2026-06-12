@@ -54,8 +54,8 @@ namespace EasyRest.Core
 
         public EasyRestStatus()
         {
-            RestPeriod = new Period("فترة الراحة", "لقد حان وقت العمل", new TimeSpan(0, 10, 0));
-            WorkPeriod = new Period("فترة العمل", "لقد حان وقت الراحة", new TimeSpan(0, 20, 0));
+            RestPeriod = new Period("فترة الراحة", "لقد حان وقت العمل", new TimeSpan(0, 10, 0), Period.EnAlarmType.ScreenOverlay);
+            WorkPeriod = new Period("فترة العمل", "لقد حان وقت الراحة", new TimeSpan(0, 20, 0), Period.EnAlarmType.ScreenOverlay);
 
             CurrentPeriod = WorkPeriod;
 

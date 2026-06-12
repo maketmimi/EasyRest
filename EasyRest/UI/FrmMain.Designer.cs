@@ -162,6 +162,7 @@
             // NiEasyRest
             // 
             this.NiEasyRest.Icon = ((System.Drawing.Icon)(resources.GetObject("NiEasyRest.Icon")));
+            this.NiEasyRest.Text = "برنامج منظم فترات الراحة";
             this.NiEasyRest.Visible = true;
             this.NiEasyRest.Click += new System.EventHandler(this.NiEasyRest_Click);
             // 
