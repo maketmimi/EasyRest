@@ -1,6 +1,5 @@
 ﻿using EasyRest.Core;
 using EasyRest.Properties;
-using EasyRest.UI;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -79,14 +78,8 @@ namespace EasyRest
         {
             LoadUserSavedConfigsIfAny();
             LoadFormWithStatus();
-        }
-
-        private void BtnAbout_Click(object sender, EventArgs e)
-        {
-            FrmAbout frmAbout = new FrmAbout();
-
-            frmAbout.ShowDialog();
-
+            LoadSettingsPageWithCurrentSettings();
+            AddPeriodsToCbCurrentPeriod();
         }
 
         private void BtnClose_Click(object sender, EventArgs e)
@@ -107,20 +100,6 @@ namespace EasyRest
         private void NiEasyRest_Click(object sender, EventArgs e)
         {
             this.Show();
-        }
-
-        private void BtnSettings_Click(object sender, EventArgs e)
-        {
-            bool IsAppPausedByUser = !_Status.IsRunning;
-
-            if (!IsAppPausedByUser)
-                ChkStartStop.Checked = false; // pause app
-
-            if (FrmSettings.EditSettings(_Status) == FrmSettings.EnEditSettingsResult.Edited)
-                UpdatePeriodInfoInUI();
-
-            if (!IsAppPausedByUser)
-                ChkStartStop.Checked = true; // resume app
         }
 
         private void UpdateCountDownLabel()
@@ -153,6 +132,96 @@ namespace EasyRest
         {
             SaveUserConfigs();
         }
-    
+
+        private void LLbGithubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LLbGithubLink.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/maketmimi");
+        }
+
+        private void PbAppLogo_Click(object sender, System.EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/maketmimi/EasyRest");
+        }
+
+        private void SetAlarmTypeToPeriod(string AlarmType, Period period)
+        {
+            switch (AlarmType)
+            {
+                case "تنبيه بالإشعارات":
+                    period.AlarmType = Period.EnAlarmType.NotificationsOnly;
+                    break;
+                case "تنبيه صوتي":
+                    period.AlarmType = Period.EnAlarmType.SoundOnly;
+                    break;
+                default:
+                    period.AlarmType = Period.EnAlarmType.ScreenOverlay;
+                    break;
+            }
+        }
+
+        private void ApplySettings()
+        {
+            _Status.WorkPeriod.Duration = new TimeSpan(0, ((int)NudWorkDuration.Value), 0);
+            _Status.RestPeriod.Duration = new TimeSpan(0, ((int)NudRestDuration.Value), 0);
+
+            SetAlarmTypeToPeriod(CbWorkPeriodAlarmType.SelectedItem.ToString(), _Status.WorkPeriod);
+            SetAlarmTypeToPeriod(CbRestPeriodAlarmType.SelectedItem.ToString(), _Status.RestPeriod);
+
+            _Status.CurrentPeriod = (Period)CbCurrentPeriod.SelectedItem; // this should be here, or there might be logical error
+        }
+
+        private void LoadComboBoxWithCurrentSelectedAlarmType(ComboBox cbToLoad, Period.EnAlarmType AlarmType)
+        {
+            switch (AlarmType)
+            {
+                case Period.EnAlarmType.NotificationsOnly:
+                    cbToLoad.SelectedItem = "تنبيه بالإشعارات";
+                    break;
+                case Period.EnAlarmType.SoundOnly:
+                    cbToLoad.SelectedItem = "تنبيه صوتي";
+                    break;
+                default:
+                    cbToLoad.SelectedItem = "تنبيه ملء الشاشة";
+                    break;
+            }
+        }
+
+        private void LoadCbCurrentPeriodWithCurrentPeriod()
+        {
+            CbCurrentPeriod.SelectedItem = _Status.CurrentPeriod;
+        }
+
+        private void AddPeriodsToCbCurrentPeriod()
+        {
+            CbCurrentPeriod.Items.Add(_Status.WorkPeriod);
+            CbCurrentPeriod.Items.Add(_Status.RestPeriod);
+        }
+
+        private void LoadSettingsPageWithCurrentSettings()
+        {
+            LoadCbCurrentPeriodWithCurrentPeriod();
+
+            NudWorkDuration.Value = ((decimal)_Status.WorkPeriod.Duration.TotalMinutes);
+            NudRestDuration.Value = ((decimal)_Status.RestPeriod.Duration.TotalMinutes);
+
+            LoadComboBoxWithCurrentSelectedAlarmType(CbWorkPeriodAlarmType, _Status.WorkPeriod.AlarmType);
+            LoadComboBoxWithCurrentSelectedAlarmType(CbRestPeriodAlarmType, _Status.RestPeriod.AlarmType);
+        }
+
+        private void BtnApply_Click(object sender, EventArgs e)
+        {
+            ApplySettings();
+            UpdatePeriodInfoInUI();
+            MessageBox.Show("تم التعديل بنجاح", "تم", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
+        }
+
+        private void TabMain_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPageIndex == 1) // Settings Page
+            {
+                LoadSettingsPageWithCurrentSettings();
+            }
+        }
     }
 }
