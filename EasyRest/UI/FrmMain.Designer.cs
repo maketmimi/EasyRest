@@ -41,6 +41,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ChkStartStop = new System.Windows.Forms.CheckBox();
             this.PgSettings = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.TxtSoundFileName = new System.Windows.Forms.TextBox();
             this.BtnApply = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.CbRestPeriodAlarmType = new System.Windows.Forms.ComboBox();
@@ -67,11 +69,18 @@
             this.PbAppLogo = new System.Windows.Forms.PictureBox();
             this.LLbGithubLink = new System.Windows.Forms.LinkLabel();
             this.ImgMain = new System.Windows.Forms.ImageList(this.components);
+            this.BtnBrowseAlarmSound = new System.Windows.Forms.Button();
+            this.CbPeriodToSetSoundFor = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.BtnSetDefaultAlarmSound = new System.Windows.Forms.Button();
+            this.OpenFALarmSound = new System.Windows.Forms.OpenFileDialog();
             this.TabMain.SuspendLayout();
             this.PbMain.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.PgSettings.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NudRestDuration)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -213,6 +222,9 @@
             // 
             // PgSettings
             // 
+            this.PgSettings.AutoScroll = true;
+            this.PgSettings.AutoScrollMargin = new System.Drawing.Size(0, 10);
+            this.PgSettings.Controls.Add(this.groupBox6);
             this.PgSettings.Controls.Add(this.BtnApply);
             this.PgSettings.Controls.Add(this.groupBox3);
             this.PgSettings.Controls.Add(this.groupBox4);
@@ -227,17 +239,43 @@
             this.PgSettings.ToolTipText = "قم بتعديل الفواصل الزمنية وأنواع التنبيهات";
             this.PgSettings.UseVisualStyleBackColor = true;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.BtnSetDefaultAlarmSound);
+            this.groupBox6.Controls.Add(this.label14);
+            this.groupBox6.Controls.Add(this.label13);
+            this.groupBox6.Controls.Add(this.CbPeriodToSetSoundFor);
+            this.groupBox6.Controls.Add(this.BtnBrowseAlarmSound);
+            this.groupBox6.Controls.Add(this.TxtSoundFileName);
+            this.groupBox6.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.groupBox6.Location = new System.Drawing.Point(26, 459);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(568, 204);
+            this.groupBox6.TabIndex = 2;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "إعدادات صوت التنبيه";
+            // 
+            // TxtSoundFileName
+            // 
+            this.TxtSoundFileName.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtSoundFileName.Location = new System.Drawing.Point(260, 116);
+            this.TxtSoundFileName.Name = "TxtSoundFileName";
+            this.TxtSoundFileName.ReadOnly = true;
+            this.TxtSoundFileName.Size = new System.Drawing.Size(295, 35);
+            this.TxtSoundFileName.TabIndex = 4;
+            // 
             // BtnApply
             // 
             this.BtnApply.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.BtnApply.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
             this.BtnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.BtnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnApply.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnApply.Font = new System.Drawing.Font("Segoe UI", 16F);
             this.BtnApply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.BtnApply.Location = new System.Drawing.Point(461, 420);
+            this.BtnApply.Location = new System.Drawing.Point(495, 402);
             this.BtnApply.Name = "BtnApply";
-            this.BtnApply.Size = new System.Drawing.Size(141, 49);
+            this.BtnApply.Size = new System.Drawing.Size(99, 43);
             this.BtnApply.TabIndex = 3;
             this.BtnApply.Text = "تطبيق";
             this.BtnApply.UseVisualStyleBackColor = true;
@@ -252,7 +290,7 @@
             this.groupBox3.Controls.Add(this.NudRestDuration);
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.groupBox3.Location = new System.Drawing.Point(34, 274);
+            this.groupBox3.Location = new System.Drawing.Point(26, 274);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(568, 122);
             this.groupBox3.TabIndex = 2;
@@ -346,7 +384,7 @@
             this.groupBox4.Controls.Add(this.NudWorkDuration);
             this.groupBox4.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.groupBox4.Location = new System.Drawing.Point(34, 146);
+            this.groupBox4.Location = new System.Drawing.Point(26, 146);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(568, 122);
             this.groupBox4.TabIndex = 1;
@@ -437,7 +475,7 @@
             this.groupBox5.Controls.Add(this.CbCurrentPeriod);
             this.groupBox5.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.groupBox5.Location = new System.Drawing.Point(34, 11);
+            this.groupBox5.Location = new System.Drawing.Point(26, 11);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(568, 129);
             this.groupBox5.TabIndex = 0;
@@ -596,6 +634,80 @@
             this.ImgMain.Images.SetKeyName(1, "setting.png");
             this.ImgMain.Images.SetKeyName(2, "about.png");
             // 
+            // BtnBrowseAlarmSound
+            // 
+            this.BtnBrowseAlarmSound.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.BtnBrowseAlarmSound.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.BtnBrowseAlarmSound.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.BtnBrowseAlarmSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBrowseAlarmSound.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnBrowseAlarmSound.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.BtnBrowseAlarmSound.Location = new System.Drawing.Point(155, 116);
+            this.BtnBrowseAlarmSound.Name = "BtnBrowseAlarmSound";
+            this.BtnBrowseAlarmSound.Size = new System.Drawing.Size(99, 34);
+            this.BtnBrowseAlarmSound.TabIndex = 4;
+            this.BtnBrowseAlarmSound.Text = "اختيار صوت";
+            this.BtnBrowseAlarmSound.UseVisualStyleBackColor = true;
+            this.BtnBrowseAlarmSound.Click += new System.EventHandler(this.BtnBrowseAlarmSound_Click);
+            // 
+            // CbPeriodToSetSoundFor
+            // 
+            this.CbPeriodToSetSoundFor.BackColor = System.Drawing.Color.White;
+            this.CbPeriodToSetSoundFor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbPeriodToSetSoundFor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CbPeriodToSetSoundFor.ForeColor = System.Drawing.Color.Black;
+            this.CbPeriodToSetSoundFor.FormattingEnabled = true;
+            this.CbPeriodToSetSoundFor.Location = new System.Drawing.Point(306, 43);
+            this.CbPeriodToSetSoundFor.Name = "CbPeriodToSetSoundFor";
+            this.CbPeriodToSetSoundFor.Size = new System.Drawing.Size(189, 29);
+            this.CbPeriodToSetSoundFor.TabIndex = 6;
+            this.CbPeriodToSetSoundFor.SelectedIndexChanged += new System.EventHandler(this.CbPeriodToSetSoundFor_SelectedIndexChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(501, 45);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(59, 25);
+            this.label13.TabIndex = 6;
+            this.label13.Text = "الفترة:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(433, 85);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(127, 25);
+            this.label14.TabIndex = 7;
+            this.label14.Text = "الصوت الحالي:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // BtnSetDefaultAlarmSound
+            // 
+            this.BtnSetDefaultAlarmSound.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.BtnSetDefaultAlarmSound.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.BtnSetDefaultAlarmSound.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.BtnSetDefaultAlarmSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSetDefaultAlarmSound.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSetDefaultAlarmSound.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.BtnSetDefaultAlarmSound.Location = new System.Drawing.Point(411, 157);
+            this.BtnSetDefaultAlarmSound.Name = "BtnSetDefaultAlarmSound";
+            this.BtnSetDefaultAlarmSound.Size = new System.Drawing.Size(144, 34);
+            this.BtnSetDefaultAlarmSound.TabIndex = 8;
+            this.BtnSetDefaultAlarmSound.Text = "الصوت الإفتراضي";
+            this.BtnSetDefaultAlarmSound.UseVisualStyleBackColor = true;
+            this.BtnSetDefaultAlarmSound.Click += new System.EventHandler(this.BtnSetDefaultAlarmSound_Click);
+            // 
+            // OpenFALarmSound
+            // 
+            this.OpenFALarmSound.Filter = "Wave Files|*.wav;*.wave";
+            this.OpenFALarmSound.Title = "اختيار صوت التنبيه";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -620,6 +732,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.PgSettings.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NudRestDuration)).EndInit();
@@ -674,6 +788,14 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox CbCurrentPeriod;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TextBox TxtSoundFileName;
+        private System.Windows.Forms.Button BtnBrowseAlarmSound;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox CbPeriodToSetSoundFor;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button BtnSetDefaultAlarmSound;
+        private System.Windows.Forms.OpenFileDialog OpenFALarmSound;
     }
 }
 

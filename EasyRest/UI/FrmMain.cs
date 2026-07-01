@@ -2,6 +2,7 @@
 using EasyRest.Properties;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace EasyRest
@@ -11,10 +12,28 @@ namespace EasyRest
         public FrmMain()
         {
             InitializeComponent();
+            LoadUserSavedConfigsIfAny();
+            LoadFormWithStatus();
+            AddPeriodsToComboBox(CbCurrentPeriod);
+            AddPeriodsToComboBox(CbPeriodToSetSoundFor);
+            LoadSettingsPageWithCurrentSettings();
+            CheckAlarmSoundFilesIfAny(_Status.WorkPeriod);
+            CheckAlarmSoundFilesIfAny(_Status.RestPeriod);
         }
 
         private bool _IsClosedByXButton = true;
         private EasyRestStatus _Status = new EasyRestStatus(); 
+
+        private void CheckAlarmSoundFilesIfAny(Period period)
+        {
+            switch (period.ValidateAlarmSoundFile())
+            {
+                case Period.EnValidateSoundFileResult.FileNotFound:
+                case Period.EnValidateSoundFileResult.InvalidFormat:
+                    NiEasyRest.ShowBalloonTip(10000, "خطأ", "حدث خطأ أثناء تحميل الملف الصوتي التالي" + Environment.NewLine + period.AlarmSoundPath, ToolTipIcon.Error);
+                    break;
+            }
+        }
 
         private void LoadUserSavedConfigsIfAny()
         {
@@ -76,10 +95,7 @@ namespace EasyRest
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            LoadUserSavedConfigsIfAny();
-            LoadFormWithStatus();
-            LoadSettingsPageWithCurrentSettings();
-            AddPeriodsToCbCurrentPeriod();
+            
         }
 
         private void BtnClose_Click(object sender, EventArgs e)
@@ -187,20 +203,21 @@ namespace EasyRest
             }
         }
 
-        private void LoadCbCurrentPeriodWithCurrentPeriod()
+        private void LoadComboBoxWithCurrentPeriod(ComboBox comboBox)
         {
-            CbCurrentPeriod.SelectedItem = _Status.CurrentPeriod;
+            comboBox.SelectedItem = _Status.CurrentPeriod;
         }
 
-        private void AddPeriodsToCbCurrentPeriod()
+        private void AddPeriodsToComboBox(ComboBox comboBox)
         {
-            CbCurrentPeriod.Items.Add(_Status.WorkPeriod);
-            CbCurrentPeriod.Items.Add(_Status.RestPeriod);
+            comboBox.Items.Add(_Status.WorkPeriod);
+            comboBox.Items.Add(_Status.RestPeriod);
         }
 
         private void LoadSettingsPageWithCurrentSettings()
         {
-            LoadCbCurrentPeriodWithCurrentPeriod();
+            LoadComboBoxWithCurrentPeriod(CbCurrentPeriod);
+            LoadComboBoxWithCurrentPeriod(CbPeriodToSetSoundFor);
 
             NudWorkDuration.Value = ((decimal)_Status.WorkPeriod.Duration.TotalMinutes);
             NudRestDuration.Value = ((decimal)_Status.RestPeriod.Duration.TotalMinutes);
@@ -223,5 +240,36 @@ namespace EasyRest
                 LoadSettingsPageWithCurrentSettings();
             }
         }
+
+        private void UpdateAlarmSoundSettingsInfoInUi()
+        {
+            if (((Period)CbPeriodToSetSoundFor.SelectedItem).IsDefaultSound())
+                TxtSoundFileName.Text = "الصوت الإفتراضي";
+            else
+                TxtSoundFileName.Text = Path.GetFileName(((Period)CbPeriodToSetSoundFor.SelectedItem).AlarmSoundPath);
+        } 
+
+        private void CbPeriodToSetSoundFor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateAlarmSoundSettingsInfoInUi();
+        }
+
+        private void BtnSetDefaultAlarmSound_Click(object sender, EventArgs e)
+        {
+            ((Period)CbPeriodToSetSoundFor.SelectedItem).AlarmSoundPath = null; // means default sound
+            UpdateAlarmSoundSettingsInfoInUi();
+        }
+
+        private void BtnBrowseAlarmSound_Click(object sender, EventArgs e)
+        {
+            OpenFALarmSound.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic, Environment.SpecialFolderOption.None);
+        
+            if (OpenFALarmSound.ShowDialog() == DialogResult.OK)
+            {
+                ((Period)CbPeriodToSetSoundFor.SelectedItem).AlarmSoundPath = OpenFALarmSound.FileName;
+                UpdateAlarmSoundSettingsInfoInUi();
+            }
+        }
+    
     }
 }
