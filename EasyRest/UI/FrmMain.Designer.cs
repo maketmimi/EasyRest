@@ -42,6 +42,11 @@
             this.ChkStartStop = new System.Windows.Forms.CheckBox();
             this.PgSettings = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.BtnSetDefaultAlarmSound = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.CbPeriodToSetSoundFor = new System.Windows.Forms.ComboBox();
+            this.BtnBrowseAlarmSound = new System.Windows.Forms.Button();
             this.TxtSoundFileName = new System.Windows.Forms.TextBox();
             this.BtnApply = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -69,12 +74,14 @@
             this.PbAppLogo = new System.Windows.Forms.PictureBox();
             this.LLbGithubLink = new System.Windows.Forms.LinkLabel();
             this.ImgMain = new System.Windows.Forms.ImageList(this.components);
-            this.BtnBrowseAlarmSound = new System.Windows.Forms.Button();
-            this.CbPeriodToSetSoundFor = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.BtnSetDefaultAlarmSound = new System.Windows.Forms.Button();
             this.OpenFALarmSound = new System.Windows.Forms.OpenFileDialog();
+            this.CmTaskBarIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.startStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.showAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hideAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TabMain.SuspendLayout();
             this.PbMain.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -89,14 +96,16 @@
             this.PbAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbAppLogo)).BeginInit();
+            this.CmTaskBarIcon.SuspendLayout();
             this.SuspendLayout();
             // 
             // NiEasyRest
             // 
+            this.NiEasyRest.ContextMenuStrip = this.CmTaskBarIcon;
             this.NiEasyRest.Icon = ((System.Drawing.Icon)(resources.GetObject("NiEasyRest.Icon")));
             this.NiEasyRest.Text = "برنامج منظم فترات الراحة";
             this.NiEasyRest.Visible = true;
-            this.NiEasyRest.Click += new System.EventHandler(this.NiEasyRest_Click);
+            this.NiEasyRest.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NiEasyRest_MouseClick);
             // 
             // TMainTimer
             // 
@@ -218,7 +227,7 @@
             this.ChkStartStop.Text = "متوقف";
             this.ChkStartStop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ChkStartStop.UseVisualStyleBackColor = false;
-            this.ChkStartStop.Click += new System.EventHandler(this.ChkStartStop_CheckedChanged);
+            this.ChkStartStop.Click += new System.EventHandler(this.ChkStartStop_Clicked);
             // 
             // PgSettings
             // 
@@ -255,6 +264,75 @@
             this.groupBox6.TabIndex = 2;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "إعدادات صوت التنبيه";
+            // 
+            // BtnSetDefaultAlarmSound
+            // 
+            this.BtnSetDefaultAlarmSound.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.BtnSetDefaultAlarmSound.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.BtnSetDefaultAlarmSound.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.BtnSetDefaultAlarmSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnSetDefaultAlarmSound.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnSetDefaultAlarmSound.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.BtnSetDefaultAlarmSound.Location = new System.Drawing.Point(411, 157);
+            this.BtnSetDefaultAlarmSound.Name = "BtnSetDefaultAlarmSound";
+            this.BtnSetDefaultAlarmSound.Size = new System.Drawing.Size(144, 34);
+            this.BtnSetDefaultAlarmSound.TabIndex = 8;
+            this.BtnSetDefaultAlarmSound.Text = "الصوت الإفتراضي";
+            this.BtnSetDefaultAlarmSound.UseVisualStyleBackColor = true;
+            this.BtnSetDefaultAlarmSound.Click += new System.EventHandler(this.BtnSetDefaultAlarmSound_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label14.ForeColor = System.Drawing.Color.Black;
+            this.label14.Location = new System.Drawing.Point(433, 85);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(127, 25);
+            this.label14.TabIndex = 7;
+            this.label14.Text = "الصوت الحالي:";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 14F);
+            this.label13.ForeColor = System.Drawing.Color.Black;
+            this.label13.Location = new System.Drawing.Point(501, 45);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(59, 25);
+            this.label13.TabIndex = 6;
+            this.label13.Text = "الفترة:";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // CbPeriodToSetSoundFor
+            // 
+            this.CbPeriodToSetSoundFor.BackColor = System.Drawing.Color.White;
+            this.CbPeriodToSetSoundFor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbPeriodToSetSoundFor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CbPeriodToSetSoundFor.ForeColor = System.Drawing.Color.Black;
+            this.CbPeriodToSetSoundFor.FormattingEnabled = true;
+            this.CbPeriodToSetSoundFor.Location = new System.Drawing.Point(306, 43);
+            this.CbPeriodToSetSoundFor.Name = "CbPeriodToSetSoundFor";
+            this.CbPeriodToSetSoundFor.Size = new System.Drawing.Size(189, 29);
+            this.CbPeriodToSetSoundFor.TabIndex = 6;
+            this.CbPeriodToSetSoundFor.SelectedIndexChanged += new System.EventHandler(this.CbPeriodToSetSoundFor_SelectedIndexChanged);
+            // 
+            // BtnBrowseAlarmSound
+            // 
+            this.BtnBrowseAlarmSound.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.BtnBrowseAlarmSound.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
+            this.BtnBrowseAlarmSound.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.BtnBrowseAlarmSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnBrowseAlarmSound.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnBrowseAlarmSound.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.BtnBrowseAlarmSound.Location = new System.Drawing.Point(155, 116);
+            this.BtnBrowseAlarmSound.Name = "BtnBrowseAlarmSound";
+            this.BtnBrowseAlarmSound.Size = new System.Drawing.Size(99, 34);
+            this.BtnBrowseAlarmSound.TabIndex = 4;
+            this.BtnBrowseAlarmSound.Text = "اختيار صوت";
+            this.BtnBrowseAlarmSound.UseVisualStyleBackColor = true;
+            this.BtnBrowseAlarmSound.Click += new System.EventHandler(this.BtnBrowseAlarmSound_Click);
             // 
             // TxtSoundFileName
             // 
@@ -634,79 +712,67 @@
             this.ImgMain.Images.SetKeyName(1, "setting.png");
             this.ImgMain.Images.SetKeyName(2, "about.png");
             // 
-            // BtnBrowseAlarmSound
-            // 
-            this.BtnBrowseAlarmSound.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.BtnBrowseAlarmSound.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.BtnBrowseAlarmSound.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.BtnBrowseAlarmSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnBrowseAlarmSound.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnBrowseAlarmSound.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.BtnBrowseAlarmSound.Location = new System.Drawing.Point(155, 116);
-            this.BtnBrowseAlarmSound.Name = "BtnBrowseAlarmSound";
-            this.BtnBrowseAlarmSound.Size = new System.Drawing.Size(99, 34);
-            this.BtnBrowseAlarmSound.TabIndex = 4;
-            this.BtnBrowseAlarmSound.Text = "اختيار صوت";
-            this.BtnBrowseAlarmSound.UseVisualStyleBackColor = true;
-            this.BtnBrowseAlarmSound.Click += new System.EventHandler(this.BtnBrowseAlarmSound_Click);
-            // 
-            // CbPeriodToSetSoundFor
-            // 
-            this.CbPeriodToSetSoundFor.BackColor = System.Drawing.Color.White;
-            this.CbPeriodToSetSoundFor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbPeriodToSetSoundFor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CbPeriodToSetSoundFor.ForeColor = System.Drawing.Color.Black;
-            this.CbPeriodToSetSoundFor.FormattingEnabled = true;
-            this.CbPeriodToSetSoundFor.Location = new System.Drawing.Point(306, 43);
-            this.CbPeriodToSetSoundFor.Name = "CbPeriodToSetSoundFor";
-            this.CbPeriodToSetSoundFor.Size = new System.Drawing.Size(189, 29);
-            this.CbPeriodToSetSoundFor.TabIndex = 6;
-            this.CbPeriodToSetSoundFor.SelectedIndexChanged += new System.EventHandler(this.CbPeriodToSetSoundFor_SelectedIndexChanged);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(501, 45);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(59, 25);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "الفترة:";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Segoe UI", 14F);
-            this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(433, 85);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(127, 25);
-            this.label14.TabIndex = 7;
-            this.label14.Text = "الصوت الحالي:";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // BtnSetDefaultAlarmSound
-            // 
-            this.BtnSetDefaultAlarmSound.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.BtnSetDefaultAlarmSound.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Silver;
-            this.BtnSetDefaultAlarmSound.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.BtnSetDefaultAlarmSound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnSetDefaultAlarmSound.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnSetDefaultAlarmSound.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.BtnSetDefaultAlarmSound.Location = new System.Drawing.Point(411, 157);
-            this.BtnSetDefaultAlarmSound.Name = "BtnSetDefaultAlarmSound";
-            this.BtnSetDefaultAlarmSound.Size = new System.Drawing.Size(144, 34);
-            this.BtnSetDefaultAlarmSound.TabIndex = 8;
-            this.BtnSetDefaultAlarmSound.Text = "الصوت الإفتراضي";
-            this.BtnSetDefaultAlarmSound.UseVisualStyleBackColor = true;
-            this.BtnSetDefaultAlarmSound.Click += new System.EventHandler(this.BtnSetDefaultAlarmSound_Click);
-            // 
             // OpenFALarmSound
             // 
             this.OpenFALarmSound.Filter = "Wave Files|*.wav;*.wave";
             this.OpenFALarmSound.Title = "اختيار صوت التنبيه";
+            // 
+            // CmTaskBarIcon
+            // 
+            this.CmTaskBarIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.startStopToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.showAppToolStripMenuItem,
+            this.hideAppToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.quitToolStripMenuItem});
+            this.CmTaskBarIcon.Name = "CmTaskBarIcon";
+            this.CmTaskBarIcon.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.CmTaskBarIcon.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.CmTaskBarIcon.Size = new System.Drawing.Size(181, 126);
+            this.CmTaskBarIcon.Opening += new System.ComponentModel.CancelEventHandler(this.CmTaskBarIcon_Opening);
+            // 
+            // startStopToolStripMenuItem
+            // 
+            this.startStopToolStripMenuItem.CheckOnClick = true;
+            this.startStopToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.startStopToolStripMenuItem.Name = "startStopToolStripMenuItem";
+            this.startStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startStopToolStripMenuItem.Text = "متوقف";
+            this.startStopToolStripMenuItem.Click += new System.EventHandler(this.startStopToolStripMenuItem_click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // showAppToolStripMenuItem
+            // 
+            this.showAppToolStripMenuItem.Name = "showAppToolStripMenuItem";
+            this.showAppToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showAppToolStripMenuItem.Text = "إظهار التطبيق";
+            this.showAppToolStripMenuItem.Click += new System.EventHandler(this.showAppToolStripMenuItem_Click);
+            // 
+            // quitToolStripMenuItem
+            // 
+            this.quitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.quitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("quitToolStripMenuItem.Image")));
+            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Text = "إغلاق";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
+            // 
+            // hideAppToolStripMenuItem
+            // 
+            this.hideAppToolStripMenuItem.Name = "hideAppToolStripMenuItem";
+            this.hideAppToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hideAppToolStripMenuItem.Text = "إخفاء التطبيق";
+            this.hideAppToolStripMenuItem.Click += new System.EventHandler(this.hideAppToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // FrmMain
             // 
@@ -746,6 +812,7 @@
             this.PbAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbAppLogo)).EndInit();
+            this.CmTaskBarIcon.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -796,6 +863,13 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button BtnSetDefaultAlarmSound;
         private System.Windows.Forms.OpenFileDialog OpenFALarmSound;
+        private System.Windows.Forms.ContextMenuStrip CmTaskBarIcon;
+        private System.Windows.Forms.ToolStripMenuItem startStopToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem showAppToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem hideAppToolStripMenuItem;
     }
 }
 

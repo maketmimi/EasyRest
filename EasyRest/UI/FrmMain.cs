@@ -52,7 +52,7 @@ namespace EasyRest
         private void UpdateStartStopCheckBox()
         {
             Color ColorToSet =
-                ChkStartStop.Checked ?
+                _Status.IsRunning ?
                 Color.FromArgb(0, 192, 0) :
                 Color.FromArgb(192, 0, 0);
 
@@ -61,9 +61,10 @@ namespace EasyRest
             ChkStartStop.FlatAppearance.MouseOverBackColor = ColorToSet;
 
             ChkStartStop.Text =
-                ChkStartStop.Checked ?
+                _Status.IsRunning ?
                 "يعمل" : "متوقف";
 
+            ChkStartStop.Checked = _Status.IsRunning;
         }
 
         private void SetRunningState(bool IsRunning)
@@ -80,10 +81,11 @@ namespace EasyRest
             }
         }
 
-        private void ChkStartStop_CheckedChanged(object sender, EventArgs e)
+        private void ChkStartStop_Clicked(object sender, EventArgs e)
         {
-            UpdateStartStopCheckBox();
             SetRunningState(ChkStartStop.Checked);
+            UpdateStartStopCheckBox();
+            UpdateStartStopTsmi();
         }
 
         private void LoadFormWithStatus()
@@ -98,10 +100,15 @@ namespace EasyRest
             
         }
 
-        private void BtnClose_Click(object sender, EventArgs e)
+        private void CloseAppProgramaticlly()
         {
             _IsClosedByXButton = false;
             Application.Exit();
+        }
+
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            CloseAppProgramaticlly();
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -111,11 +118,6 @@ namespace EasyRest
                 e.Cancel = true;
                 this.Hide();
             }
-        }
-
-        private void NiEasyRest_Click(object sender, EventArgs e)
-        {
-            this.Show();
         }
 
         private void UpdateCountDownLabel()
@@ -270,6 +272,63 @@ namespace EasyRest
                 UpdateAlarmSoundSettingsInfoInUi();
             }
         }
-    
+
+        private void UpdateStartStopTsmi()
+        {
+            Color ColorToSet =
+                _Status.IsRunning ?
+                Color.FromArgb(0, 192, 0) :
+                Color.FromArgb(192, 0, 0);
+
+            startStopToolStripMenuItem.ForeColor = ColorToSet;
+
+            startStopToolStripMenuItem.Text =
+                _Status.IsRunning ?
+                "يعمل" : "متوقف";
+
+            startStopToolStripMenuItem.Checked = _Status.IsRunning;
+        }
+
+        private void startStopToolStripMenuItem_click(object sender, EventArgs e)
+        {
+            SetRunningState(startStopToolStripMenuItem.Checked);
+            UpdateStartStopCheckBox();
+            UpdateStartStopTsmi();
+        }
+
+        private void showAppToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CloseAppProgramaticlly();
+        }
+
+        private void NiEasyRest_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                this.Show();
+        }
+
+        private void hideAppToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void CmTaskBarIcon_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (this.Visible)
+            {
+                hideAppToolStripMenuItem.Enabled = true;
+                showAppToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                hideAppToolStripMenuItem.Enabled = false;
+                showAppToolStripMenuItem.Enabled = true;
+            }
+        }
     }
 }
