@@ -52,14 +52,14 @@ namespace EasyRest.Core
             return $"{NumberOfSecondsRemainig / 60:D2}:{NumberOfSecondsRemainig % 60:D2}";
         }
 
-        public EasyRestStatus()
+        public EasyRestStatus(bool isRunning)
         {
             RestPeriod = new Period("فترة الراحة", "لقد حان وقت العمل", new TimeSpan(0, 10, 0), Period.EnAlarmType.ScreenOverlay, null);
             WorkPeriod = new Period("فترة العمل", "لقد حان وقت الراحة", new TimeSpan(0, 20, 0), Period.EnAlarmType.ScreenOverlay, null);
 
             CurrentPeriod = WorkPeriod;
 
-            IsRunning = false;
+            IsRunning = isRunning;
         }
 
         private EasyRestStatus(Period workPeriod, Period restPeriod)

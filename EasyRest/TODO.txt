@@ -1,4 +1,10 @@
-﻿1- add deiffrent types of alarms -> notifications and sound only
-2- add alarm sound customizabilty
-3- add Restore defaults in settings
-4- add save configs feature -> completed
+﻿1- add Restore defaults in settings
+2- Handle power loose config file problems
+
+
+
+Done:-
+2- Run on startup
+1- add run silently
+4- add settings button in the context menu
+3- save configs immeditlly

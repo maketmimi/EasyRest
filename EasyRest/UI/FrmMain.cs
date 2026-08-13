@@ -11,6 +11,8 @@ namespace EasyRest
     {
         public FrmMain()
         {
+            _IsAppInitializing = true;
+
             InitializeComponent();
             LoadUserSavedConfigsIfAny();
             LoadFormWithStatus();
@@ -19,10 +21,13 @@ namespace EasyRest
             LoadSettingsPageWithCurrentSettings();
             CheckAlarmSoundFilesIfAny(_Status.WorkPeriod);
             CheckAlarmSoundFilesIfAny(_Status.RestPeriod);
+            
+            _IsAppInitializing = false;
         }
 
         private bool _IsClosedByXButton = true;
-        private EasyRestStatus _Status = new EasyRestStatus(); 
+        private bool _IsAppInitializing;
+        private EasyRestStatus _Status = new EasyRestStatus(true); 
 
         private void CheckAlarmSoundFilesIfAny(Period period)
         {
@@ -146,11 +151,6 @@ namespace EasyRest
             }
         }
 
-        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            SaveUserConfigs();
-        }
-
         private void LLbGithubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LLbGithubLink.LinkVisited = true;
@@ -216,6 +216,11 @@ namespace EasyRest
             comboBox.Items.Add(_Status.RestPeriod);
         }
 
+        private void InitializeRunOnStartupCheckBox()
+        {
+            ChkRunAppOnStartup.Checked = WindowsHelpers.IsAppStartupWhenUserLoggesInEnabled();
+        }
+
         private void LoadSettingsPageWithCurrentSettings()
         {
             LoadComboBoxWithCurrentPeriod(CbCurrentPeriod);
@@ -226,11 +231,13 @@ namespace EasyRest
 
             LoadComboBoxWithCurrentSelectedAlarmType(CbWorkPeriodAlarmType, _Status.WorkPeriod.AlarmType);
             LoadComboBoxWithCurrentSelectedAlarmType(CbRestPeriodAlarmType, _Status.RestPeriod.AlarmType);
+            InitializeRunOnStartupCheckBox();
         }
 
         private void BtnApply_Click(object sender, EventArgs e)
         {
             ApplySettings();
+            SaveUserConfigs();
             UpdatePeriodInfoInUI();
             MessageBox.Show("تم التعديل بنجاح", "تم", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
         }
@@ -329,6 +336,19 @@ namespace EasyRest
                 hideAppToolStripMenuItem.Enabled = false;
                 showAppToolStripMenuItem.Enabled = true;
             }
+        }
+
+        private void openSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TabMain.SelectedIndex = 1;
+            this.Show();
+        }
+
+        private void ChkRunAppOnStartup_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_IsAppInitializing) return;
+
+            WindowsHelpers.ChangeAppStartupWhenUserLoggesIn(ChkRunAppOnStartup.Checked);
         }
     }
 }

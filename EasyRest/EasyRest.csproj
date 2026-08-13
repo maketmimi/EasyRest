@@ -64,6 +64,7 @@
     <Compile Include="Core\NotificationAlarm.cs" />
     <Compile Include="Core\Period.cs" />
     <Compile Include="Core\SoundOnlyAlarm.cs" />
+    <Compile Include="Core\WindowsHelpers.cs" />
     <Compile Include="UI\FrmAlarmOverlay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +114,7 @@
     <Content Include="Assets\EasyRestIcon.png" />
     <Content Include="Assets\LogoBlack.png" />
     <Content Include="Assets\MalekAltamimi_Logo.png" />
+    <Content Include="Assets\setting.png" />
     <Content Include="EasyRestIcon.ico" />
     <Content Include="TODO.txt" />
   </ItemGroup>
