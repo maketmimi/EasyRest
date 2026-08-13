@@ -68,7 +68,7 @@ namespace EasyRest.Core
             RestPeriod = restPeriod;
 
             CurrentPeriod = workPeriod;
-            IsRunning = false;
+            IsRunning = true;
         }
 
         public string ConvertToStringRecord()

@@ -15,7 +15,7 @@ namespace EasyRest
 
             InitializeComponent();
             LoadUserSavedConfigsIfAny();
-            LoadFormWithStatus();
+            LoadAppWithStatus();
             AddPeriodsToComboBox(CbCurrentPeriod);
             AddPeriodsToComboBox(CbPeriodToSetSoundFor);
             LoadSettingsPageWithCurrentSettings();
@@ -93,11 +93,13 @@ namespace EasyRest
             UpdateStartStopTsmi();
         }
 
-        private void LoadFormWithStatus()
+        private void LoadAppWithStatus()
         {
             LbCurrentPeriod.Text = _Status.CurrentPeriod.ToString();
             LbCountDown.Text = _Status.GetReminingDurationString();
-            ChkStartStop.Checked = _Status.IsRunning;
+            TMainTimer.Enabled = _Status.IsRunning;
+            UpdateStartStopCheckBox();
+            UpdateStartStopTsmi();
         }
 
         private void FrmMain_Load(object sender, EventArgs e)

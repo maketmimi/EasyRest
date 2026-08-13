@@ -36,6 +36,7 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.showAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TMainTimer = new System.Windows.Forms.Timer(this.components);
@@ -46,8 +47,9 @@
             this.LbCountDown = new System.Windows.Forms.Label();
             this.LbCurrentPeriod = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ChkStartStop = new System.Windows.Forms.CheckBox();
             this.PgSettings = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.ChkRunAppOnStartup = new System.Windows.Forms.CheckBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.BtnSetDefaultAlarmSound = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
@@ -82,15 +84,14 @@
             this.LLbGithubLink = new System.Windows.Forms.LinkLabel();
             this.ImgMain = new System.Windows.Forms.ImageList(this.components);
             this.OpenFALarmSound = new System.Windows.Forms.OpenFileDialog();
-            this.openSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.ChkRunAppOnStartup = new System.Windows.Forms.CheckBox();
+            this.ChkStartStop = new System.Windows.Forms.CheckBox();
             this.CmTaskBarIcon.SuspendLayout();
             this.TabMain.SuspendLayout();
             this.PbMain.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.PgSettings.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NudRestDuration)).BeginInit();
@@ -100,7 +101,6 @@
             this.PbAbout.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbAppLogo)).BeginInit();
-            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // NiEasyRest
@@ -124,7 +124,7 @@
             this.CmTaskBarIcon.Name = "CmTaskBarIcon";
             this.CmTaskBarIcon.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.CmTaskBarIcon.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.CmTaskBarIcon.Size = new System.Drawing.Size(143, 126);
+            this.CmTaskBarIcon.Size = new System.Drawing.Size(181, 148);
             this.CmTaskBarIcon.Opening += new System.ComponentModel.CancelEventHandler(this.CmTaskBarIcon_Opening);
             // 
             // startStopToolStripMenuItem
@@ -134,40 +134,48 @@
             this.startStopToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.startStopToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.startStopToolStripMenuItem.Name = "startStopToolStripMenuItem";
-            this.startStopToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.startStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.startStopToolStripMenuItem.Text = "يعمل";
             this.startStopToolStripMenuItem.Click += new System.EventHandler(this.startStopToolStripMenuItem_click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(139, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // showAppToolStripMenuItem
             // 
             this.showAppToolStripMenuItem.Name = "showAppToolStripMenuItem";
-            this.showAppToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.showAppToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showAppToolStripMenuItem.Text = "إظهار التطبيق";
             this.showAppToolStripMenuItem.Click += new System.EventHandler(this.showAppToolStripMenuItem_Click);
             // 
             // hideAppToolStripMenuItem
             // 
             this.hideAppToolStripMenuItem.Name = "hideAppToolStripMenuItem";
-            this.hideAppToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.hideAppToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.hideAppToolStripMenuItem.Text = "إخفاء التطبيق";
             this.hideAppToolStripMenuItem.Click += new System.EventHandler(this.hideAppToolStripMenuItem_Click);
+            // 
+            // openSettingsToolStripMenuItem
+            // 
+            this.openSettingsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openSettingsToolStripMenuItem.Image")));
+            this.openSettingsToolStripMenuItem.Name = "openSettingsToolStripMenuItem";
+            this.openSettingsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openSettingsToolStripMenuItem.Text = "الإعدادات";
+            this.openSettingsToolStripMenuItem.Click += new System.EventHandler(this.openSettingsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(139, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.quitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("quitToolStripMenuItem.Image")));
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.quitToolStripMenuItem.Text = "إغلاق";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -275,27 +283,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "حالة البرنامج";
             // 
-            // ChkStartStop
-            // 
-            this.ChkStartStop.Appearance = System.Windows.Forms.Appearance.Button;
-            this.ChkStartStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.ChkStartStop.Checked = true;
-            this.ChkStartStop.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkStartStop.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ChkStartStop.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.ChkStartStop.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.ChkStartStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ChkStartStop.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChkStartStop.ForeColor = System.Drawing.Color.White;
-            this.ChkStartStop.Location = new System.Drawing.Point(112, 49);
-            this.ChkStartStop.Name = "ChkStartStop";
-            this.ChkStartStop.Size = new System.Drawing.Size(257, 83);
-            this.ChkStartStop.TabIndex = 0;
-            this.ChkStartStop.Text = "يعمل";
-            this.ChkStartStop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ChkStartStop.UseVisualStyleBackColor = false;
-            this.ChkStartStop.Click += new System.EventHandler(this.ChkStartStop_Clicked);
-            // 
             // PgSettings
             // 
             this.PgSettings.AutoScroll = true;
@@ -315,6 +302,31 @@
             this.PgSettings.Text = "الإعدادات";
             this.PgSettings.ToolTipText = "قم بتعديل الفواصل الزمنية وأنواع التنبيهات";
             this.PgSettings.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.ChkRunAppOnStartup);
+            this.groupBox7.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.groupBox7.Location = new System.Drawing.Point(26, 670);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(568, 91);
+            this.groupBox7.TabIndex = 6;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "تشغيل البرنامج تلقائياً";
+            // 
+            // ChkRunAppOnStartup
+            // 
+            this.ChkRunAppOnStartup.AutoSize = true;
+            this.ChkRunAppOnStartup.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkRunAppOnStartup.ForeColor = System.Drawing.Color.Black;
+            this.ChkRunAppOnStartup.Location = new System.Drawing.Point(151, 41);
+            this.ChkRunAppOnStartup.Name = "ChkRunAppOnStartup";
+            this.ChkRunAppOnStartup.Size = new System.Drawing.Size(404, 29);
+            this.ChkRunAppOnStartup.TabIndex = 0;
+            this.ChkRunAppOnStartup.Text = "تشغيل البرنامج تلقائياً عند تشغيل جهاز الكومبيوتر";
+            this.ChkRunAppOnStartup.UseVisualStyleBackColor = true;
+            this.ChkRunAppOnStartup.CheckedChanged += new System.EventHandler(this.ChkRunAppOnStartup_CheckedChanged);
             // 
             // groupBox6
             // 
@@ -785,38 +797,25 @@
             this.OpenFALarmSound.Filter = "Wave Files|*.wav;*.wave";
             this.OpenFALarmSound.Title = "اختيار صوت التنبيه";
             // 
-            // openSettingsToolStripMenuItem
+            // ChkStartStop
             // 
-            this.openSettingsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openSettingsToolStripMenuItem.Image")));
-            this.openSettingsToolStripMenuItem.Name = "openSettingsToolStripMenuItem";
-            this.openSettingsToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.openSettingsToolStripMenuItem.Text = "الإعدادات";
-            this.openSettingsToolStripMenuItem.Click += new System.EventHandler(this.openSettingsToolStripMenuItem_Click);
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.ChkRunAppOnStartup);
-            this.groupBox7.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.groupBox7.Location = new System.Drawing.Point(26, 670);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(568, 91);
-            this.groupBox7.TabIndex = 6;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "تشغيل البرنامج تلقائياً";
-            // 
-            // ChkRunAppOnStartup
-            // 
-            this.ChkRunAppOnStartup.AutoSize = true;
-            this.ChkRunAppOnStartup.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChkRunAppOnStartup.ForeColor = System.Drawing.Color.Black;
-            this.ChkRunAppOnStartup.Location = new System.Drawing.Point(151, 41);
-            this.ChkRunAppOnStartup.Name = "ChkRunAppOnStartup";
-            this.ChkRunAppOnStartup.Size = new System.Drawing.Size(404, 29);
-            this.ChkRunAppOnStartup.TabIndex = 0;
-            this.ChkRunAppOnStartup.Text = "تشغيل البرنامج تلقائياً عند تشغيل جهاز الكومبيوتر";
-            this.ChkRunAppOnStartup.UseVisualStyleBackColor = true;
-            this.ChkRunAppOnStartup.CheckedChanged += new System.EventHandler(this.ChkRunAppOnStartup_CheckedChanged);
+            this.ChkStartStop.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ChkStartStop.Checked = true;
+            this.ChkStartStop.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkStartStop.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ChkStartStop.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.ChkStartStop.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.ChkStartStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ChkStartStop.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ChkStartStop.ForeColor = System.Drawing.Color.White;
+            this.ChkStartStop.Location = new System.Drawing.Point(112, 47);
+            this.ChkStartStop.Name = "ChkStartStop";
+            this.ChkStartStop.Size = new System.Drawing.Size(257, 83);
+            this.ChkStartStop.TabIndex = 1;
+            this.ChkStartStop.Text = "يعمل";
+            this.ChkStartStop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ChkStartStop.UseVisualStyleBackColor = false;
+            this.ChkStartStop.Click += new System.EventHandler(this.ChkStartStop_Clicked);
             // 
             // FrmMain
             // 
@@ -842,6 +841,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.PgSettings.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -856,8 +857,6 @@
             this.PbAbout.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbAppLogo)).EndInit();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -875,7 +874,6 @@
         private System.Windows.Forms.Label LbCountDown;
         private System.Windows.Forms.Label LbCurrentPeriod;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox ChkStartStop;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -918,6 +916,7 @@
         private System.Windows.Forms.ToolStripMenuItem openSettingsToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.CheckBox ChkRunAppOnStartup;
+        private System.Windows.Forms.CheckBox ChkStartStop;
     }
 }
 

@@ -2,9 +2,3 @@
 2- Handle power loose config file problems
 
 
-
-Done:-
-2- Run on startup
-1- add run silently
-4- add settings button in the context menu
-3- save configs immeditlly
