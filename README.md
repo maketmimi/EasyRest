@@ -9,7 +9,7 @@
 ## روابط
 
 - 🌐 الموقع الرسمي: [زيارة الموقع](https://maketmimi.github.io/EasyRest-Website/)  
-- ⬇️ تحميل التطبيق: [تحميل EasyRest](https://github.com/maketmimi/EasyRest/releases/download/v1.0.0/EasyRest.exe)
+- ⬇️ تحميل التطبيق: [تحميل EasyRest](https://github.com/maketmimi/EasyRest/releases/download/2.0.0/EasyRest.exe)
 
 ---
 
