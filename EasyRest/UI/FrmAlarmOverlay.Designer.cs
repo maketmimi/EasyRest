@@ -93,6 +93,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmAlarmOverlay_FormClosed);
             this.Load += new System.EventHandler(this.FrmAlarmOverlay_Load);
+            this.Shown += new System.EventHandler(this.FrmAlarmOverlay_Shown);
             this.ResumeLayout(false);
 
         }

@@ -11,13 +11,64 @@ namespace EasyRest.UI
         private static readonly short NUMBER_OF_MILLISECONDS_IN_A_SECOND = 1000;
         private readonly SoundPlayer _AlarmSoundPlayer;
         private bool _IsSoundPlaying = false;
-        private readonly NotifyIcon _NiError = new NotifyIcon();
+        private readonly NotifyIcon _NiError = null;
+        private readonly FrmAlarmOverlay _ParentOverlayForm = null;
+        private readonly bool _IsChild = false;
+        private FrmAlarmOverlay[] _ChildOverlays = null;
+        private Screen _ScreenToShowOverlayOn = null;
 
-        private FrmAlarmOverlay(string AlarmMessage, ushort ShowTimeInSeconds = 30)
+        // Base constructor
+        private FrmAlarmOverlay(string AlarmMessage)
         {
             InitializeComponent();
+            LbAlarmMessage.Text = AlarmMessage;
+        }
+
+        // Parent must not be null
+        private FrmAlarmOverlay(string AlarmMessage, FrmAlarmOverlay Parent, Screen ScreenToShowOverlayOn)
+            : this(AlarmMessage)
+        {
+            _ParentOverlayForm = Parent;
+            _IsChild = true;
+            _ScreenToShowOverlayOn = ScreenToShowOverlayOn;
+
+            this.StartPosition = FormStartPosition.Manual; // this is importent
+            this.Location = _ScreenToShowOverlayOn.Bounds.Location;
+
+            _ParentOverlayForm.FormClosed += _Parent_FormClosed;
+        }
+
+        private void _Parent_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void DisplayChildOverlaysOnAllScreensIfAny()
+        {
+            Screen[] AllScreens = Screen.AllScreens;
+
+            if (AllScreens.Length > 1)
+            {
+                _ChildOverlays = new FrmAlarmOverlay[AllScreens.Length - 1];
+
+                int ChildOverlaysIndex = 0;
+                for (int ScreensIndex = 0; ScreensIndex < AllScreens.Length; ScreensIndex++)
+                {
+                    if (AllScreens[ScreensIndex].Primary) continue;
+
+                    _ChildOverlays[ChildOverlaysIndex] = new FrmAlarmOverlay(LbAlarmMessage.Text, this, AllScreens[ScreensIndex]);
+                    _ChildOverlays[ChildOverlaysIndex].Show();
+
+                    ChildOverlaysIndex++;
+                }
+            }
+        }
+
+        private FrmAlarmOverlay(string AlarmMessage, ushort ShowTimeInSeconds = 30)
+         : this(AlarmMessage)
+        {
             TShowTimer.Interval = ShowTimeInSeconds * NUMBER_OF_MILLISECONDS_IN_A_SECOND;
-            LbAlarmMessage.Text = AlarmMessage;                                  
+            _NiError = new NotifyIcon();
             _NiError.Text = "EasyRest";
             _NiError.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             _NiError.Visible = false;
@@ -44,6 +95,8 @@ namespace EasyRest.UI
 
         private void FrmAlarmOverlay_Load(object sender, System.EventArgs e)
         {
+            if (_IsChild) return;
+
             try
             {
                 _AlarmSoundPlayer.PlayLooping();
@@ -76,13 +129,23 @@ namespace EasyRest.UI
 
         private void BtnClose_Click(object sender, System.EventArgs e)
         {
-            CloseAlarm();
+            if (_IsChild)
+                _ParentOverlayForm.CloseAlarm();
+            else
+                CloseAlarm();
         }
 
         private void FrmAlarmOverlay_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (_IsSoundPlaying)
                 _AlarmSoundPlayer.Stop();
+        }
+
+        private void FrmAlarmOverlay_Shown(object sender, EventArgs e)
+        {
+            if (_IsChild) return;
+
+            DisplayChildOverlaysOnAllScreensIfAny();
         }
     }
 }
