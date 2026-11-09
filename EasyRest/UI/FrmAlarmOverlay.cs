@@ -22,9 +22,10 @@ namespace EasyRest.UI
         {
             InitializeComponent();
             LbAlarmMessage.Text = AlarmMessage;
+            this.StartPosition = FormStartPosition.Manual; // this is importent
         }
 
-        // Parent must not be null
+        // Parent must not be null, this is child alarm form constructor 
         private FrmAlarmOverlay(string AlarmMessage, FrmAlarmOverlay Parent, Screen ScreenToShowOverlayOn)
             : this(AlarmMessage)
         {
@@ -32,10 +33,42 @@ namespace EasyRest.UI
             _IsChild = true;
             _ScreenToShowOverlayOn = ScreenToShowOverlayOn;
 
-            this.StartPosition = FormStartPosition.Manual; // this is importent
             this.Location = _ScreenToShowOverlayOn.Bounds.Location;
 
             _ParentOverlayForm.FormClosed += _Parent_FormClosed;
+        }
+       
+        // Parent alarm form constructors
+        private FrmAlarmOverlay(string AlarmMessage, ushort ShowTimeInSeconds = 30)
+         : this(AlarmMessage)
+        {
+            _ScreenToShowOverlayOn = Screen.PrimaryScreen;
+
+            this.Location = _ScreenToShowOverlayOn.Bounds.Location;
+
+            TShowTimer.Interval = ShowTimeInSeconds * NUMBER_OF_MILLISECONDS_IN_A_SECOND;
+            _NiError = new NotifyIcon();
+            _NiError.Text = "EasyRest";
+            _NiError.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            _NiError.Visible = false;
+            _NiError.BalloonTipClosed += _NiError_BalloonTipClosed;
+        }
+
+        public FrmAlarmOverlay(string AlarmMessage, string AlarmSoundPath, ushort ShowTimeInSeconds = 30)
+            : this(AlarmMessage, ShowTimeInSeconds)
+        {
+            _AlarmSoundPlayer = new SoundPlayer(AlarmSoundPath);
+        }
+
+        public FrmAlarmOverlay(string AlarmMessage, Stream AlarmSound, ushort ShowTimeInSeconds = 30)
+            : this(AlarmMessage, ShowTimeInSeconds)
+        {
+            _AlarmSoundPlayer = new SoundPlayer(AlarmSound);
+        }
+
+        private void _NiError_BalloonTipClosed(object sender, EventArgs e)
+        {
+            _NiError.Visible = false;
         }
 
         private void _Parent_FormClosed(object sender, FormClosedEventArgs e)
@@ -63,35 +96,6 @@ namespace EasyRest.UI
                 }
             }
         }
-
-        private FrmAlarmOverlay(string AlarmMessage, ushort ShowTimeInSeconds = 30)
-         : this(AlarmMessage)
-        {
-            TShowTimer.Interval = ShowTimeInSeconds * NUMBER_OF_MILLISECONDS_IN_A_SECOND;
-            _NiError = new NotifyIcon();
-            _NiError.Text = "EasyRest";
-            _NiError.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
-            _NiError.Visible = false;
-            _NiError.BalloonTipClosed += _NiError_BalloonTipClosed;
-        }
-
-        private void _NiError_BalloonTipClosed(object sender, EventArgs e)
-        {
-            _NiError.Visible = false;
-        }
-
-        public FrmAlarmOverlay(string AlarmMessage, string AlarmSoundPath, ushort ShowTimeInSeconds = 30)
-            : this(AlarmMessage, ShowTimeInSeconds)
-        {
-            _AlarmSoundPlayer = new SoundPlayer(AlarmSoundPath);
-        }
-
-        public FrmAlarmOverlay(string AlarmMessage, Stream AlarmSound, ushort ShowTimeInSeconds = 30)
-            : this(AlarmMessage, ShowTimeInSeconds)
-        {
-            _AlarmSoundPlayer = new SoundPlayer(AlarmSound);
-        }
-
 
         private void FrmAlarmOverlay_Load(object sender, System.EventArgs e)
         {
