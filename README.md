@@ -8,8 +8,9 @@
 
 ## روابط
 
-- 🌐 الموقع الرسمي: [زيارة الموقع](https://maketmimi.github.io/EasyRest-Website/)  
-- ⬇️ تحميل التطبيق: [تحميل EasyRest](https://github.com/maketmimi/EasyRest/releases/download/2.0.0/EasyRest.exe)
+- 🌐 الموقع الرسمي : [زيارة الموقع](https://easyrest.altamimi.ly)  
+- ⬇️ تحميل التطبيق : [تحميل EasyRest](https://github.com/maketmimi/EasyRest/releases)
+- ☕ تحميل نسخة ال Java : [تحميل EasyRest-Java Edition](https://github.com/maketmimi/EasyRest_JavaEdition/releases)
 
 ---
 
@@ -64,3 +65,9 @@
 الهدف الأساسي من المشروع هو بناء تطبيق بسيط وعملي يساعد على فهم كيفية تصميم وتنفيذ أدوات إنتاجية خفيفة تعمل في الخلفية.
 
 هذا المشروع ما يزال في مرحلة التطوير، وجميع الاقتراحات والأفكار لتحسينه موضع ترحيب.
+
+
+## روابط
+
+- [EasyRest - Java Edition](https://github.com/maketmimi/EasyRest_JavaEdition)
+- [My Portfolio](https://altamimi.ly)
